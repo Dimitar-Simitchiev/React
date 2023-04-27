@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "node-modules": "^1.0.1",
+    "react-axios": "^2.0.6",
+    "react-bootstrap": "^2.7.4",
+    "react-router-dom": "^6.10.0",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^9.1.2"
+  }
+}

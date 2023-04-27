@@ -1,0 +1,20 @@
+{
+    "2d5ae478-87c7-45fa-acf9-f04aa4724421": {
+        "type": "G-Class",
+        "price": "250000",
+        "img": "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/1-mercedes-benz-g-class-2019-rt-hero-front.jpg?itok=kG4plfw1",
+        "_id": "1240549d-f0e0-497e-ab99-eb8f703713d7"
+    },
+    "6012c542-38e1-4660-ba40-1b109c40cb2f": {
+        "type": "S-Class",
+        "price": "150000",
+        "img": "https://hips.hearstapps.com/hmg-prod/images/2021-mercedes-maybach-s-class-107-1605768447.jpg?crop=0.758xw:0.639xh;0.184xw,0.310xh&resize=1200:*",
+        "_id": "143e5265-333e-4150-80e4-16b61de31aa0"
+    },
+    "d749a819-1e41-4c65-9ce2-7b429c4ebd0d": {
+        "type": "C-Class",
+        "price": "20000",
+        "img": "https://media.ed.edmunds-media.com/mercedes-benz/c-class/2023/oem/2023_mercedes-benz_c-class_sedan_amg-c-43_fq_oem_1_1280x855.jpg",
+        "_id": "a9bae6d8-793e-46c4-a9db-deb9e3484909"
+    }
+}
