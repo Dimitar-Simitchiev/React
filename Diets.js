@@ -4,14 +4,18 @@ import './Diets.css';
     export default function Diets({
         program
     },){
+      
       let username=document.getElementById("top").textContent.slice(9);
       const navigate=useNavigate();
       const[coments,setComents]=useState([]);
       const[name,setName]=useState(username);
       const[objcoments,setObjComents]=useState([]);
+      const[like,setLike]=useState([]);
       const[programId,setProgramid]=useState(program._id)
-      let date=new Date();
-      
+      let time = new Date().toLocaleTimeString("en-GB");
+      let date=new Date().toLocaleDateString("en-GB");
+      const[boollike,setBooLike]=useState(false);
+      let n=0;
       
       useEffect(()=>{
       fetch("http://localhost:3030/jsonstore/coments")
@@ -33,6 +37,28 @@ import './Diets.css';
      
 
      })
+
+     fetch("http://localhost:3030/jsonstore/likes")
+        .then(res=>res.json())
+        .then(x=>Object.values(x))
+        .then(result=>{
+          
+          if (result.programId!==program._id) {
+            setProgramid(program._id)
+           
+          setLike(result)
+          }else{
+            
+            setLike([])
+          } result.map(x=>{
+            if(x.username===username){
+              setBooLike(true)
+            }
+          })
+         
+        })
+       
+        console.log(boollike)
     
     
   },[])
@@ -43,13 +69,12 @@ import './Diets.css';
      const Comment=(e)=>{
       e.preventDefault()
      setProgramid(program._id)
-     document.getElementById('int').value='';
+    
    
-     
-      const empobj = {coments, name, programId,date};
+      const empobj = {coments, name, programId,date,time};
 
      
-
+     
       fetch("http://localhost:3030/jsonstore/coments", {
           method: "POST",
           headers: { "content-type": "application/json" },
@@ -61,6 +86,7 @@ import './Diets.css';
           console.log(err.message);
       })
      
+     
         fetch("http://localhost:3030/jsonstore/coments")
        .then(res=>res.json())
        .then(x=>Object.values(x))
@@ -68,7 +94,7 @@ import './Diets.css';
    
        setObjComents(result)
        
-        console.log(date)
+        
        
   
        })
@@ -81,7 +107,51 @@ import './Diets.css';
         
 
      }
+     const onLike=(e)=>{
+      
+        fetch("http://localhost:3030/jsonstore/likes")
+        .then(res=>res.json())
+        .then(x=>Object.values(x))
+        .then(result=>{
+        
+          if (result.programId!==program._id) {
+            setProgramid(program._id)
+           
+          setLike(result)
+          }else{
+            
+            setLike([])
+          }
+          result.map(x=>{
+            if(x.username===username){
+              setBooLike(true)
+            }
+          })
+          
+        })
+        if (boollike===false) {
+           let numofLikes=1;
+          const empobj = {username,programId,numofLikes};
+          fetch("http://localhost:3030/jsonstore/likes", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(empobj)
+          }).then(() => {
+            
+              navigate('/programs');
+          }).catch((err) => {
+              console.log(err.message);
+          })
+          
+         
+         
 
+        }
+        
+        
+      
+    
+     }
 
      const onDelete = (e) => {
       e.preventDefault()
@@ -122,8 +192,18 @@ import './Diets.css';
         </h1>
       <p className='description'>
        Description:{program.description} 
+       <br></br>
        <button className="delete-diet" id={program._id} onClick={onDelete}>Delete program</button>
-       <h1></h1>
+       <button className="like-button" id={program._id} onClick={onLike}>Like:{like.map(x=>{
+       if (x.programId===program._id) {
+        n++;
+    
+       
+        
+       }
+    
+      })}, {n}</button>
+      
        
       </p>
      
@@ -131,13 +211,13 @@ import './Diets.css';
       {objcoments.map(x=>{
        if (x.programId===program._id) {
          return <div>
-           <p className="coment-list"><p2 className="name-coment">{x.date}...{x.name}</p2>:      {x.coments}</p>
+           <p className="coment-list"><p1 className="name-coment"><p clsssName="date-time">{x.date}г-{x.time}</p>{x.name}</p1>:      {x.coments}</p>
            <br></br>
            </div>
        }
       })}
      <br></br>
-     <input id="int" className="int" onChange={e => setComents(e.target.value)} />
+     <input id="int" value={coments} className="int" onChange={e => setComents(e.target.value)} />
      <button  className="coment-btn" onClick={Comment}>COMMENT</button>
      
       </div>

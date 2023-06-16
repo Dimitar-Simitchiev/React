@@ -90,6 +90,22 @@ input{
     opacity: 0.9;
     font-size: 20px;
   }
-
+  .date-time{
+    font-size: 8px;
+    color: purple;
+}
+img {
+    border-radius: 50%;
+  }
+  .like-button{
+    padding: 10px;
+    background-color: #047999;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+  }
    
   
